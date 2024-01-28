@@ -11,8 +11,7 @@ const Login = (props) => {
         const response = await fetch(`http://localhost:5505/api/auth/login`, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
-                "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVhMThiMDlkNzBiNDQ4NjQ5Y2VlNDFiIn0sImlhdCI6MTcwNTA5NzUxNH0.2l2d41rmYwZhjutC4TfCo-6EjRRDsJgMMrZ8b9dXb2A"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({email: credentials.email, password: credentials.password})
         });
@@ -23,8 +22,8 @@ const Login = (props) => {
         if (json.success) {
             // save the auth token and redirect
             localStorage.setItem('token', json.authtoken);
-            history("/");
             props.showAlert("Logged in successfully", "success")
+            history("/");
         }
         else {
             // alert("Invalid credentials")
@@ -38,7 +37,8 @@ const Login = (props) => {
       }
 
     return (
-        <div>
+        <div className='mt-3'>
+            <h2>Login To View Your Notes</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
